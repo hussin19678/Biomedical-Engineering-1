@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>المحاضرات</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+
+        <div class="logo-icon">⚕</div>
+
+        <div>
+            <h2>هندسة الطب الحياتي</h2>
+            <span>Biomedical Engineering</span>
+        </div>
+
+    </div>
+
+    <nav>
+
+        <a href="index.html">الرئيسية</a>
+        <a href="lectures.html" class="active">المحاضرات</a>
+        <a href="schedule.html">الجدول</a>
+        <a href="results.html">النتائج</a>
+        <a href="login.html" class="login-btn">الإدارة</a>
+
+    </nav>
+
+</header>
+
+<main class="page-container">
+
+    <div class="page-title">
+
+        <span>LECTURES</span>
+
+        <h1>المحاضرات الدراسية</h1>
+
+        <p>
+            جميع المحاضرات المضافة من قبل إدارة القسم.
+        </p>
+
+    </div>
+
+    <div id="lectureContainer" class="lecture-grid"></div>
+
+</main>
+
+<footer>
+
+    <h3>قسم هندسة الطب الحياتي</h3>
+
+    <p>Biomedical Engineering Department</p>
+
+    <p>© 2026</p>
+
+</footer>
+
+<script>
+
+const defaultLectures = [
+
+    {
+        name: "Medical Instrumentation",
+        teacher: "قسم هندسة الطب الحياتي",
+        stage: "المرحلة الثالثة"
+    },
+
+    {
+        name: "Biomedical Signals",
+        teacher: "قسم هندسة الطب الحياتي",
+        stage: "المرحلة الثالثة"
+    },
+
+    {
+        name: "Medical Imaging",
+        teacher: "قسم هندسة الطب الحياتي",
+        stage: "المرحلة الرابعة"
+    },
+
+    {
+        name: "Biomaterials",
+        teacher: "قسم هندسة الطب الحياتي",
+        stage: "المرحلة الثانية"
+    }
+
+];
+
+let lectures =
+    JSON.parse(localStorage.getItem("lectures"));
+
+if (!lectures || lectures.length === 0) {
+    lectures = defaultLectures;
+}
+
+const container =
+    document.getElementById("lectureContainer");
+
+lectures.forEach(function(item) {
+
+    container.innerHTML += `
+
+        <div class="lecture-card">
+
+            <div class="lecture-icon">
+                📖
+            </div>
+
+            <div>
+
+                <span class="stage">
+                    ${item.stage}
+                </span>
+
+                <h2>
+                    ${item.name}
+                </h2>
+
+                <p>
+                    التدريسي: ${item.teacher}
+                </p>
+
+                <button
+                    class="btn primary"
+                    onclick="downloadLecture('${item.name}')">
+
+                    فتح المحاضرة
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+});
+
+function downloadLecture(name) {
+
+    alert(
+        "المحاضرة: " +
+        name +
+        "\n\nيمكن ربط هذا الزر لاحقاً بملف PDF."
+    );
+
+}
+
+</script>
+
+</body>
+</html>

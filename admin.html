@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الإدارة</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<script>
+
+if (localStorage.getItem("adminLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+</script>
+
+<header>
+
+    <div class="logo">
+        <div class="logo-icon">⚕</div>
+
+        <div>
+            <h2>لوحة الإدارة</h2>
+            <span>Biomedical Engineering</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="index.html">الرئيسية</a>
+        <a href="lectures.html">المحاضرات</a>
+        <a href="schedule.html">الجدول</a>
+        <a href="results.html">النتائج</a>
+        <button onclick="logout()" class="logout-btn">
+            تسجيل الخروج
+        </button>
+    </nav>
+
+</header>
+
+<main class="admin-container">
+
+    <div class="admin-header">
+
+        <div>
+            <span>ADMIN PANEL</span>
+            <h1>لوحة التحكم</h1>
+            <p>إدارة محتوى قسم هندسة الطب الحياتي</p>
+        </div>
+
+        <div class="admin-user">
+            👤 Admin
+        </div>
+
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <span>👨‍🎓</span>
+            <h2>250</h2>
+            <p>عدد الطلبة</p>
+        </div>
+
+        <div class="stat">
+            <span>👨‍🏫</span>
+            <h2>24</h2>
+            <p>عدد التدريسيين</p>
+        </div>
+
+        <div class="stat">
+            <span>📚</span>
+            <h2 id="lectureCount">0</h2>
+            <p>المحاضرات</p>
+        </div>
+
+        <div class="stat">
+            <span>📰</span>
+            <h2 id="newsCount">0</h2>
+            <p>الأخبار</p>
+        </div>
+
+    </div>
+
+    <section class="admin-section">
+
+        <h2>إضافة خبر جديد</h2>
+
+        <input
+            type="text"
+            id="newsTitle"
+            placeholder="عنوان الخبر"
+        >
+
+        <textarea
+            id="newsText"
+            placeholder="محتوى الخبر"
+        ></textarea>
+
+        <button onclick="addNews()" class="btn primary">
+            إضافة الخبر
+        </button>
+
+        <div id="newsList"></div>
+
+    </section>
+
+    <section class="admin-section">
+
+        <h2>إضافة محاضرة</h2>
+
+        <input
+            type="text"
+            id="lectureName"
+            placeholder="اسم المحاضرة"
+        >
+
+        <input
+            type="text"
+            id="lectureTeacher"
+            placeholder="اسم التدريسي"
+        >
+
+        <select id="lectureStage">
+
+            <option value="المرحلة الأولى">
+                المرحلة الأولى
+            </option>
+
+            <option value="المرحلة الثانية">
+                المرحلة الثانية
+            </option>
+
+            <option value="المرحلة الثالثة">
+                المرحلة الثالثة
+            </option>
+
+            <option value="المرحلة الرابعة">
+                المرحلة الرابعة
+            </option>
+
+        </select>
+
+        <button onclick="addLecture()" class="btn primary">
+            إضافة المحاضرة
+        </button>
+
+        <div id="lectureList"></div>
+
+    </section>
+
+</main>
+
+<script>
+
+let news =
+    JSON.parse(localStorage.getItem("news")) || [];
+
+let lectures =
+    JSON.parse(localStorage.getItem("lectures")) || [];
+
+function updateCounts() {
+
+    document.getElementById("newsCount").innerText =
+        news.length;
+
+    document.getElementById("lectureCount").innerText =
+        lectures.length;
+}
+
+function addNews() {
+
+    const title =
+        document.getElementById("newsTitle").value.trim();
+
+    const text =
+        document.getElementById("newsText").value.trim();
+
+    if (!title || !text) {
+        alert("يرجى إدخال جميع البيانات");
+        return;
+    }
+
+    news.push({
+        title: title,
+        text: text,
+        date: new Date().toLocaleDateString("ar-IQ")
+    });
+
+    localStorage.setItem("news", JSON.stringify(news));
+
+    document.getElementById("newsTitle").value = "";
+    document.getElementById("newsText").value = "";
+
+    displayNews();
+    updateCounts();
+}
+
+function deleteNews(index) {
+
+    news.splice(index, 1);
+
+    localStorage.setItem(
+        "news",
+        JSON.stringify(news)
+    );
+
+    displayNews();
+    updateCounts();
+}
+
+function displayNews() {
+
+    const list =
+        document.getElementById("newsList");
+
+    list.innerHTML = "";
+
+    news.forEach((item, index) => {
+
+        list.innerHTML += `
+
+        <div class="admin-item">
+
+            <div>
+                <h3>${item.title}</h3>
+                <p>${item.text}</p>
+                <small>${item.date}</small>
+            </div>
+
+            <button
+                onclick="deleteNews(${index})"
+                class="delete-btn">
+                حذف
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+function addLecture() {
+
+    const name =
+        document.getElementById("lectureName").value.trim();
+
+    const teacher =
+        document.getElementById("lectureTeacher").value.trim();
+
+    const stage =
+        document.getElementById("lectureStage").value;
+
+    if (!name || !teacher) {
+        alert("يرجى إدخال جميع البيانات");
+        return;
+    }
+
+    lectures.push({
+        name: name,
+        teacher: teacher,
+        stage: stage
+    });
+
+    localStorage.setItem(
+        "lectures",
+        JSON.stringify(lectures)
+    );
+
+    document.getElementById("lectureName").value = "";
+    document.getElementById("lectureTeacher").value = "";
+
+    displayLectures();
+    updateCounts();
+}
+
+function deleteLecture(index) {
+
+    lectures.splice(index, 1);
+
+    localStorage.setItem(
+        "lectures",
+        JSON.stringify(lectures)
+    );
+
+    displayLectures();
+    updateCounts();
+}
+
+function displayLectures() {
+
+    const list =
+        document.getElementById("lectureList");
+
+    list.innerHTML = "";
+
+    lectures.forEach((item, index) => {
+
+        list.innerHTML += `
+
+        <div class="admin-item">
+
+            <div>
+                <h3>${item.name}</h3>
+                <p>التدريسي: ${item.teacher}</p>
+                <small>${item.stage}</small>
+            </div>
+
+            <button
+                onclick="deleteLecture(${index})"
+                class="delete-btn">
+                حذف
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+function logout() {
+
+    localStorage.removeItem("adminLoggedIn");
+
+    window.location.href = "login.html";
+}
+
+displayNews();
+displayLectures();
+updateCounts();
+
+</script>
+
+</body>
+</html>

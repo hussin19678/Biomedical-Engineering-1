@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>بوابة الطالب</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body class="portal-body">
+
+
+<header class="portal-navbar">
+
+    <div class="container portal-nav-content">
+
+
+        <a href="index.html" class="logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+
+            <div>
+
+                <span>Biomedical</span>
+
+                <strong>بوابة الطالب</strong>
+
+            </div>
+
+        </a>
+
+
+        <div class="student-profile">
+
+            <div class="profile-icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div>
+
+                <strong id="studentName">
+                    طالب هندسة الطب الحياتي
+                </strong>
+
+                <small>
+                    الطالب
+                </small>
+
+            </div>
+
+            <button id="logoutBtn" title="تسجيل الخروج">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="portal-main">
+
+    <div class="container">
+
+
+        <div class="dashboard-heading">
+
+            <div>
+
+                <span>مرحباً بك 👋</span>
+
+                <h1>
+                    بوابة الطالب
+                </h1>
+
+                <p>
+                    يمكنك من هنا الوصول إلى خدمات القسم التعليمية.
+                </p>
+
+            </div>
+
+            <div class="date-box">
+
+                <i class="fa-regular fa-calendar"></i>
+
+                <span id="currentDate"></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK CARDS -->
+
+        <div class="dashboard-cards">
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+
+                <div>
+
+                    <span>المحاضرات</span>
+
+                    <strong>24</strong>
+
+                    <small>محاضرة متاحة</small>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+
+                <div>
+
+                    <span>النتائج</span>
+
+                    <strong>3.45</strong>
+
+                    <small>المعدل التراكمي</small>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+
+                <div>
+
+                    <span>الجدول</span>
+
+                    <strong>5</strong>
+
+                    <small>مواد هذا الفصل</small>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+
+                <div>
+
+                    <span>الإشعارات</span>
+
+                    <strong>4</strong>
+
+                    <small>إشعارات جديدة</small>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- SERVICES -->
+
+        <section class="portal-section">
+
+            <div class="portal-title">
+
+                <div>
+
+                    <span>الخدمات الإلكترونية</span>
+
+                    <h2>خدمات الطالب</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="services-grid">
+
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+
+                    <h3>المحاضرات</h3>
+
+                    <p>
+                        الوصول إلى المحاضرات والملفات الدراسية.
+                    </p>
+
+                    <button onclick="showDemo('المحاضرات')">
+                        فتح
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <h3>النتائج</h3>
+
+                    <p>
+                        عرض درجات ونتائج المواد الدراسية.
+                    </p>
+
+                    <button onclick="showDemo('النتائج')">
+                        عرض النتائج
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-calendar"></i>
+                    </div>
+
+                    <h3>الجدول الدراسي</h3>
+
+                    <p>
+                        الاطلاع على جدول المحاضرات الأسبوعي.
+                    </p>
+
+                    <button onclick="showDemo('الجدول الدراسي')">
+                        فتح الجدول
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+
+                </div>
+
+
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+
+                    <h3>الإعلانات</h3>
+
+                    <p>
+                        متابعة إعلانات القسم الجديدة.
+                    </p>
+
+                    <button onclick="showDemo('الإعلانات')">
+                        عرض الإعلانات
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- SCHEDULE -->
+
+        <section class="portal-section">
+
+            <div class="portal-title">
+
+                <div>
+
+                    <span>هذا الأسبوع</span>
+
+                    <h2>الجدول الدراسي</h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>اليوم</th>
+                            <th>المادة</th>
+                            <th>الوقت</th>
+                            <th>المختبر / القاعة</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+                            <td>الأحد</td>
+                            <td>الأجهزة الطبية</td>
+                            <td>9:00 - 11:00</td>
+                            <td>قاعة 1</td>
+                        </tr>
+
+                        <tr>
+                            <td>الإثنين</td>
+                            <td>الإشارات الحيوية</td>
+                            <td>10:00 - 12:00</td>
+                            <td>مختبر الإشارات</td>
+                        </tr>
+
+                        <tr>
+                            <td>الثلاثاء</td>
+                            <td>التصوير الطبي</td>
+                            <td>9:00 - 11:00</td>
+                            <td>قاعة 3</td>
+                        </tr>
+
+                        <tr>
+                            <td>الأربعاء</td>
+                            <td>البرمجة</td>
+                            <td>11:00 - 13:00</td>
+                            <td>مختبر الحاسوب</td>
+                        </tr>
+
+                        <tr>
+                            <td>الخميس</td>
+                            <td>الهندسة الحيوية</td>
+                            <td>9:00 - 11:00</td>
+                            <td>مختبر BME</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- NEWS -->
+
+        <section class="portal-section">
+
+            <div class="portal-title">
+
+                <div>
+
+                    <span>آخر المستجدات</span>
+
+                    <h2>أخبار القسم</h2>
+
+                </div>
+
+            </div>
+
+            <div id="studentNews" class="student-news-grid"></div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="simple-footer">
+
+    © 2026 قسم هندسة الطب الحياتي
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
